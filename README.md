@@ -16,7 +16,7 @@ App Start → Fetch manifest.json → Compare tag version
 
 Ad content is stored as JSON files and distributed via `raw.githubusercontent.com` CDN. Updating ads only requires pushing new JSON and tagging a release.
 
-## Quick Start
+## API
 
 ### Base URL
 
@@ -24,80 +24,53 @@ Ad content is stored as JSON files and distributed via `raw.githubusercontent.co
 https://raw.githubusercontent.com/kedaya2025/ads/main
 ```
 
-### Fetch Ads
+### Endpoints
 
-```
-GET {baseUrl}/manifest.json                          # Version check
-GET {baseUrl}/slots/{appId}/{slotId}.json            # Ad slot
-GET {baseUrl}/campaigns/{campaignId}.json            # Ad creative
-```
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/manifest.json` | Global manifest (version, app registry, defaults) |
+| GET | `/slots/{appId}/{slotId}.json` | Ad slot definition (active campaigns, priority, weight) |
+| GET | `/campaigns/{campaignId}.json` | Campaign creative (content, targeting, tracking) |
+| GET | `/targeting/{appId}/{slotId}.json` | Targeting rules (region, platform, language, etc.) |
+| GET | `/defaults/{appId}/{slotId}.json` | Fallback ad configuration |
 
-## Usage Examples
+### Path Parameters
 
-### iOS / Android
+| Parameter | Example | Description |
+|-----------|---------|-------------|
+| `appId` | `com.example.app1` | App identifier registered in `manifest.json` |
+| `slotId` | `home_banner` | Ad slot identifier |
+| `campaignId` | `camp_b123_official` | Campaign identifier |
 
-```swift
-// 1. Check version
-let manifest = try await fetch(url: baseUrl + "/manifest.json")
-let remoteTag = manifest["tag"] as! String
+### Response
 
-// 2. Fetch if version differs
-if remoteTag != localTag {
-    let slot = try await fetch(url: baseUrl + "/slots/com.app/home.json")
-}
+All endpoints return JSON with `Content-Type: application/json; charset=utf-8`. No query parameters, headers, or authentication required.
 
-// 3. Match targeting rules → Display
-```
+## Mirror Endpoints & Fallback
 
-### Web
+The official Base URL may be slow or unreachable on some networks. Use any mirror below as a drop-in replacement — the path suffix stays the same.
 
-```javascript
-const baseUrl = 'https://raw.githubusercontent.com/kedaya2025/ads/main';
+### Available Mirrors
 
-const manifest = await fetch(`${baseUrl}/manifest.json?t=${Date.now()}`).then(r => r.json());
-const slot = await fetch(`${baseUrl}/slots/com.example.app1/home_banner.json`).then(r => r.json());
-```
+| Mirror | Base URL | Cache Delay | Notes |
+|--------|----------|-------------|-------|
+| JsDelivr | `https://cdn.jsdelivr.net/gh/kedaya2025/ads@main` | ~10 min | Global CDN |
+| FastGit | `https://raw.fastgit.org/kedaya2025/ads/main` | Real-time | GitHub raw mirror |
+| GitHub Proxy | `https://ghproxy.com/https://raw.githubusercontent.com/kedaya2025/ads/main` | Real-time | Proxy, availability depends on provider |
+| Official | `https://raw.githubusercontent.com/kedaya2025/ads/main` | Real-time | GitHub raw CDN |
 
-### Python
-
-```python
-import requests
-
-base_url = "https://raw.githubusercontent.com/kedaya2025/ads/main"
-manifest = requests.get(f"{base_url}/manifest.json").json()
-slot = requests.get(f"{base_url}/slots/com.example.app1/home_banner.json").json()
-```
-
-## CDN Nodes
-
-| Region | Endpoint | Notes |
-|--------|----------|-------|
-| Global | `raw.githubusercontent.com` | Official CDN |
-| China | **Self-hosted required** | GitHub access is unstable in CN |
-
-### China Acceleration
-
-Use Cloudflare Workers to proxy `raw.githubusercontent.com`:
-
-```javascript
-addEventListener('fetch', event => {
-  const url = new URL(event.request.url);
-  const target = `https://raw.githubusercontent.com${url.pathname}`;
-  event.respondWith(fetch(target));
-});
-```
+> Third-party mirrors can go offline at any time. Configure multiple endpoints and fall back automatically.
 
 ### Multi-Endpoint Fallback
 
-Configure multiple endpoints for automatic fallback:
+Configure a list of Base URLs. Try each in order until one returns HTTP 200. Recommended timeout: 5 seconds per attempt.
 
-```json
-{
-  "endpoints": [
-    "https://your-cf-worker.example.com/ads",
-    "https://raw.githubusercontent.com/kedaya2025/ads/main"
-  ]
-}
+Recommended endpoint order:
+
+```
+https://cdn.jsdelivr.net/gh/kedaya2025/ads@main
+https://raw.fastgit.org/kedaya2025/ads/main
+https://raw.githubusercontent.com/kedaya2025/ads/main
 ```
 
 ## Documentation
