@@ -4,6 +4,7 @@
   "slotId": "home_banner",
   "label": "Home Banner",
   "dimensions": {
+    "sizeId": "banner_600x100",
     "width": 600,
     "height": 100,
     "aspectRatio": "6:1",

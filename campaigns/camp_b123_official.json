@@ -13,14 +13,28 @@
     "subtitle": "Your Gateway to Digital Services",
     "description": "Discover a wide range of digital products and services at B123.",
     "media": {
-      "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/b123-130x300.png",
+      "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/b123-600x100.png",
       "imageAlt": "B123 Official Banner",
-      "width": 130,
-      "height": 300,
+      "width": 600,
+      "height": 100,
       "format": "png",
       "thumbnail": null,
       "video": null,
-      "lottie": null
+      "lottie": null,
+      "variants": [
+        {
+          "sizeId": "banner_600x100",
+          "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/b123-600x100.png",
+          "width": 600,
+          "height": 100
+        },
+        {
+          "sizeId": "sidebar_130x300",
+          "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/b123-130x300.png",
+          "width": 130,
+          "height": 300
+        }
+      ]
     },
     "logo": null,
     "cta": {

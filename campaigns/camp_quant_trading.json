@@ -20,7 +20,21 @@
       "format": "png",
       "thumbnail": null,
       "video": null,
-      "lottie": null
+      "lottie": null,
+      "variants": [
+        {
+          "sizeId": "banner_600x100",
+          "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/quant-600x100.png",
+          "width": 600,
+          "height": 100
+        },
+        {
+          "sizeId": "banner_320x50",
+          "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/quant-320x50.png",
+          "width": 320,
+          "height": 50
+        }
+      ]
     },
     "logo": null,
     "cta": {

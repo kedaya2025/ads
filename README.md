@@ -75,6 +75,7 @@ https://raw.githubusercontent.com/kedaya2025/ads/main
 
 ## Documentation
 
+- [Integration Guide](GUIDE.md) — Standard sizes, multi-size mechanism, client request flow, onboarding steps
 - [Architecture](ARCHITECTURE.md) — JSON Schema, targeting system, fallback mechanisms
 
 ## License
