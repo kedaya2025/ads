@@ -1,0 +1,30 @@
+{
+  "$schema": "manifest-v1",
+  "version": "1.0.0",
+  "lastUpdated": "2026-09-09T00:00:00Z",
+  "publishedBy": "admin",
+  "tag": "v1.0.0",
+  "apps": [
+    {
+      "appId": "com.example.app1",
+      "name": "Test App",
+      "platforms": ["ios", "android", "web"],
+      "regions": ["*"],
+      "slots": ["home_banner"],
+      "activeCampaigns": 2
+    }
+  ],
+  "defaults": {
+    "slotLoadTimeoutMs": 5000,
+    "fallbackBehavior": "show_default",
+    "cacheStrategy": "etag",
+    "maxAdsPerSlot": 5
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-09-09",
+      "summary": "Initial release with 2 test ads"
+    }
+  ]
+}

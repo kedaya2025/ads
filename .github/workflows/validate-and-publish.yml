@@ -1,0 +1,83 @@
+name: Validate & Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'manifest.json'
+      - 'slots/**'
+      - 'campaigns/**'
+      - 'targeting/**'
+      - 'defaults/**'
+      - 'ab/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON syntax
+        run: |
+          find . -name '*.json' -not -path './.github/*' | while read f; do
+            python3 -c "import json; json.load(open('$f'))" || exit 1
+          done
+          echo "All JSON files are valid"
+
+      - name: Validate schema
+        run: python3 scripts/validate.py
+
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip-publish]')"
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Auto-bump version
+        id: version
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          CHANGED_FILES=$(git diff --name-only HEAD~1 2>/dev/null || echo "")
+          if echo "$CHANGED_FILES" | grep -q "manifest.json"; then
+            BUMP="minor"
+          else
+            BUMP="patch"
+          fi
+          IFS='.' read -r MAJOR MINOR PATCH <<< "${LAST_TAG#v}"
+          case "$BUMP" in
+            major) MAJOR=$((MAJOR+1)); MINOR=0; PATCH=0 ;;
+            minor) MINOR=$((MINOR+1)); PATCH=0 ;;
+            patch) PATCH=$((PATCH+1)) ;;
+          esac
+          NEW_VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "Bumping $LAST_TAG -> $NEW_VERSION ($BUMP)"
+
+      - name: Update manifest version
+        run: |
+          python3 -c "
+          import json, datetime
+          with open('manifest.json', 'r+') as f:
+              data = json.load(f)
+              data['version'] = '${{ steps.version.outputs.new_version }}'
+              data['tag'] = '${{ steps.version.outputs.new_version }}'
+              data['lastUpdated'] = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+              f.seek(0)
+              json.dump(data, f, indent=2, ensure_ascii=False)
+              f.write('\n')
+              f.truncate()
+          "
+
+      - name: Commit and tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add manifest.json
+          git commit -m "chore: bump version to ${{ steps.version.outputs.new_version }}" || true
+          git tag "${{ steps.version.outputs.new_version }}"
+          git push origin main --tags

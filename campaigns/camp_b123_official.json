@@ -1,0 +1,60 @@
+{
+  "$schema": "campaign-v1",
+  "campaignId": "camp_b123_official",
+  "name": "B123 Official Website Ad",
+  "type": "banner",
+  "status": "active",
+  "createdAt": "2026-09-09T00:00:00Z",
+  "updatedAt": "2026-09-09T00:00:00Z",
+  "createdBy": "admin",
+
+  "content": {
+    "title": "B123",
+    "subtitle": "Your Gateway to Digital Services",
+    "description": "Discover a wide range of digital products and services at B123.",
+    "media": {
+      "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/b123-130x300.svg",
+      "imageAlt": "B123 Official Banner",
+      "width": 130,
+      "height": 300,
+      "format": "svg",
+      "thumbnail": null,
+      "video": null,
+      "lottie": null
+    },
+    "logo": null,
+    "cta": {
+      "text": "Visit",
+      "action": "web",
+      "deeplink": null,
+      "webUrl": "https://www.b123.com",
+      "iosStoreUrl": null,
+      "androidStoreUrl": null
+    }
+  },
+
+  "targeting": {
+    "platforms": ["*"],
+    "regions": ["*"],
+    "languages": ["*"],
+    "minAppVersion": null,
+    "minOsVersion": null,
+    "deviceTypes": ["*"],
+    "excludeDeviceTypes": [],
+    "tags": ["brand", "official"]
+  },
+
+  "tracking": {
+    "impressionUrl": null,
+    "clickUrl": null,
+    "conversionUrl": null
+  },
+
+  "metadata": {
+    "budget": null,
+    "spent": null,
+    "impressions": null,
+    "clicks": null,
+    "ctr": null
+  }
+}

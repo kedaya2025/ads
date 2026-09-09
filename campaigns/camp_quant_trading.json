@@ -1,0 +1,60 @@
+{
+  "$schema": "campaign-v1",
+  "campaignId": "camp_quant_trading",
+  "name": "Quant Trading Platform Ad",
+  "type": "banner",
+  "status": "active",
+  "createdAt": "2026-09-09T00:00:00Z",
+  "updatedAt": "2026-09-09T00:00:00Z",
+  "createdBy": "admin",
+
+  "content": {
+    "title": "Quant Trading Platform",
+    "subtitle": "Advanced Algorithmic Trading Solutions",
+    "description": "Professional quantitative trading tools with real-time market data and AI-powered strategies.",
+    "media": {
+      "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/quant-600x100.svg",
+      "imageAlt": "Quant Trading Platform Banner",
+      "width": 600,
+      "height": 100,
+      "format": "svg",
+      "thumbnail": null,
+      "video": null,
+      "lottie": null
+    },
+    "logo": null,
+    "cta": {
+      "text": "Learn More",
+      "action": "web",
+      "deeplink": null,
+      "webUrl": "https://quant.b123.com",
+      "iosStoreUrl": null,
+      "androidStoreUrl": null
+    }
+  },
+
+  "targeting": {
+    "platforms": ["*"],
+    "regions": ["*"],
+    "languages": ["*"],
+    "minAppVersion": null,
+    "minOsVersion": null,
+    "deviceTypes": ["*"],
+    "excludeDeviceTypes": [],
+    "tags": ["finance", "trading"]
+  },
+
+  "tracking": {
+    "impressionUrl": null,
+    "clickUrl": null,
+    "conversionUrl": null
+  },
+
+  "metadata": {
+    "budget": null,
+    "spent": null,
+    "impressions": null,
+    "clicks": null,
+    "ctr": null
+  }
+}

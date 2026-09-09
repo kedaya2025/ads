@@ -1,0 +1,24 @@
+{
+  "$schema": "fallback-v1",
+  "appId": "com.example.app1",
+  "slotId": "home_banner",
+  "fallbacks": [
+    {
+      "campaignId": "camp_quant_trading",
+      "condition": "no_match",
+      "description": "Fallback when no match"
+    },
+    {
+      "campaignId": "camp_quant_trading",
+      "condition": "all_expired",
+      "description": "Fallback when all expired"
+    },
+    {
+      "campaignId": "camp_quant_trading",
+      "condition": "fetch_error",
+      "description": "Fallback on network error"
+    }
+  ],
+  "hideSlotOnFallback": false,
+  "fallbackImage": null
+}

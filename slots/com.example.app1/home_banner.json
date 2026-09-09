@@ -1,0 +1,33 @@
+{
+  "$schema": "slot-v1",
+  "appId": "com.example.app1",
+  "slotId": "home_banner",
+  "label": "Home Banner",
+  "dimensions": {
+    "width": 600,
+    "height": 100,
+    "aspectRatio": "6:1",
+    "format": "image"
+  },
+  "refreshIntervalSeconds": 0,
+  "maxVisibleAds": 1,
+  "campaigns": [
+    {
+      "campaignId": "camp_quant_trading",
+      "priority": 100,
+      "weight": 50,
+      "active": true,
+      "scheduleStart": null,
+      "scheduleEnd": null
+    },
+    {
+      "campaignId": "camp_b123_official",
+      "priority": 100,
+      "weight": 50,
+      "active": true,
+      "scheduleStart": null,
+      "scheduleEnd": null
+    }
+  ],
+  "updated": "2026-09-09T00:00:00Z"
+}

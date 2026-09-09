@@ -1,0 +1,20 @@
+{
+  "$schema": "targeting-rules-v1",
+  "appId": "com.example.app1",
+  "slotId": "home_banner",
+  "rules": [
+    {
+      "ruleId": "global_default",
+      "priority": 10,
+      "match": {
+        "regions": ["*"],
+        "platforms": ["*"],
+        "languages": null,
+        "appVersions": null,
+        "userSegments": null
+      },
+      "campaignIds": ["camp_quant_trading", "camp_b123_official"],
+      "description": "Global default - show both test ads"
+    }
+  ]
+}

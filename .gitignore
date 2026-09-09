@@ -1,0 +1,20 @@
+# 广告素材图片 - 使用自有CDN托管
+# 本仓库只存储JSON配置，不存储图片资源
+*.jpg
+*.png
+*.gif
+*.webp
+*.mp4
+
+# 保留默认占位图（可选）
+!defaults/**/*.png
+
+# 本地文档（不提交）
+ARCHITECTURE.md
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
