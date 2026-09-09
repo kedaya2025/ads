@@ -13,11 +13,11 @@
     "subtitle": "Advanced Algorithmic Trading Solutions",
     "description": "Professional quantitative trading tools with real-time market data and AI-powered strategies.",
     "media": {
-      "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/quant-600x100.svg",
+      "image": "https://raw.githubusercontent.com/kedaya2025/ads/main/ads/quant-600x100.png",
       "imageAlt": "Quant Trading Platform Banner",
       "width": 600,
       "height": 100,
-      "format": "svg",
+      "format": "png",
       "thumbnail": null,
       "video": null,
       "lottie": null
